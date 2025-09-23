@@ -14,7 +14,6 @@ A modern Android application showcasing NEAR blockchain integration with a clean
 
 <img src="Screenshot_20250919_134111.png" alt="NEAR Android Demo App" width="300">
 
-*The app interface showing wallet connection and network information fetching*
 
 ## �️ Tech Stack
 
@@ -192,23 +191,6 @@ try {
     }
 }
 ```
-
-#### Deep Link Configuration
-
-```xml
-<!-- AndroidManifest.xml -->
-<intent-filter android:autoVerify="true">
-    <action android:name="android.intent.action.VIEW" />
-    <category android:name="android.intent.category.DEFAULT" />
-    <category android:name="android.intent.category.BROWSABLE" />
-    <data android:scheme="myapp" android:host="callback" />
-</intent-filter>
-```
-
-- **Login URL**: `https://wallet.testnet.near.org/login/`
-- **Success Callback**: `myapp://callback?account_id={account_id}`
-- **Error Callback**: `myapp://callback?error={error_message}`
-
 
 ## Acknowledgments
 
