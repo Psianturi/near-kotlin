@@ -12,7 +12,7 @@ A modern Android application showcasing NEAR blockchain integration with a clean
 
 ## 📸 Screenshots
 
-![NEAR Android Demo App](Screenshot_20250919_134111.png)
+<img src="Screenshot_20250919_134111.png" alt="NEAR Android Demo App" width="300">
 
 *The app interface showing wallet connection and network information fetching*
 
@@ -50,7 +50,7 @@ dependencyResolutionManagement {
 
 ### Prerequisites
 - Android Studio Arctic Fox or later
-- JDK 11 or later
+- JDK 17 or later
 - Android device/emulator (API 24+)
 
 ### Quick Start
@@ -74,19 +74,6 @@ dependencyResolutionManagement {
 4. **Grant Permissions**
    - Allow internet access when prompted
    - The app will request necessary permissions automatically
-
-## 📱 Usage
-
-### Wallet Connection
-Tap "Connect Wallet" to authenticate with NEAR Testnet wallet via Custom Tabs.
-
-### Network Data
-Select RPC endpoints to fetch real-time NEAR network information including status, blocks, and gas prices.
-
-### Recent Updates
-- ✅ **Fixed Force Close Bug**: Resolved ClassCastException when fetching network info
-- ✅ **Updated Dependencies**: Corrected JitPack dependency format for NEAR JSON-RPC client
-- ✅ **Improved Error Handling**: Better error messages and null safety
 
 
 ## 🌐 Network Configuration
@@ -161,18 +148,6 @@ val status = nearClient.status()
 val block = nearClient.block()
 val gasPrice = nearClient.gasPrice()
 ```
-
-#### Available RPC Methods
-
-| Method | Description | Return Type |
-|--------|-------------|-------------|
-| `networkInfo()` | Get network information and peer details | `RpcNetworkInfoResponse` |
-| `status()` | Get node status and sync information | `RpcStatusResponse` |
-| `block()` | Get latest block information | `RpcBlockResponse` |
-| `gasPrice()` | Get current gas price | `RpcGasPriceResponse` |
-| `query()` | Query account/contract state | `RpcQueryResponse` |
-| `sendTx()` | Send transaction | `RpcTransactionResponse` |
-| `validators()` | Get validator information | `RpcValidatorResponse` |
 
 #### Advanced Usage with Parameters
 
