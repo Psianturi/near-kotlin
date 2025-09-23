@@ -123,13 +123,14 @@ fun AppScreen(repo: NearRepository, initialAccountId: String?) {
                         scope.launch {
                             loading = true
                             info = try {
-                                when (selectedEndpoint) {
+                                val result = when (selectedEndpoint) {
                                     "network_info" -> repo.getNetworkInfo()
                                     "status" -> repo.getStatus()
                                     "block" -> repo.getBlock()
                                     "gas_price" -> repo.getGasPrice()
-                                    else -> "Unknown endpoint"
+                                    else -> null
                                 }
+                                result?.toString() ?: "Unknown endpoint"
                             } catch (e: Exception) {
                                 "Error: ${e.message}"
                             }

@@ -10,7 +10,13 @@ A modern Android application showcasing NEAR blockchain integration with a clean
 - **Modern UI**: Built with Jetpack Compose and Material 3
 - **Type Safety**: Full Kotlin type safety with generated models
 
-## 🛠️ Tech Stack
+## 📸 Screenshots
+
+![NEAR Android Demo App](Screenshot_20250919_134111.png)
+
+*The app interface showing wallet connection and network information fetching*
+
+## �️ Tech Stack
 
 - **Kotlin** - Modern Android development
 - **Jetpack Compose** - Declarative UI framework
@@ -24,7 +30,7 @@ A modern Android application showcasing NEAR blockchain integration with a clean
 ```kotlin
 // Add to build.gradle.kts (app level)
 dependencies {
-    implementation("com.github.Psianturi:near-jsonrpc-kotlin-client:1.0.0")
+    implementation("com.github.Psianturi.near-jsonrpc-kotlin-client:near-jsonrpc-client:v1.0.0")
 }
 ```
 
@@ -76,6 +82,11 @@ Tap "Connect Wallet" to authenticate with NEAR Testnet wallet via Custom Tabs.
 
 ### Network Data
 Select RPC endpoints to fetch real-time NEAR network information including status, blocks, and gas prices.
+
+### Recent Updates
+- ✅ **Fixed Force Close Bug**: Resolved ClassCastException when fetching network info
+- ✅ **Updated Dependencies**: Corrected JitPack dependency format for NEAR JSON-RPC client
+- ✅ **Improved Error Handling**: Better error messages and null safety
 
 
 ## 🌐 Network Configuration

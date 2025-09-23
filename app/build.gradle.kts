@@ -28,11 +28,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
@@ -40,20 +40,23 @@ android {
 }
 
 dependencies {
-    // NEAR JSON-RPC Kotlin Client (composite build)
-    implementation("com.near:jsonrpc-client:1.0.0")
-    implementation("com.near:jsonrpc-types:1.0.0")
+    // NEAR JSON-RPC Kotlin Client
+    implementation("com.github.Psianturi.near-jsonrpc-kotlin-client:near-jsonrpc-client:v1.0.0")
 
     // Ktor for HTTP client
-    implementation("io.ktor:ktor-client-okhttp:2.3.4")
-    implementation("io.ktor:ktor-client-content-negotiation:2.3.4")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.4")
+    implementation("io.ktor:ktor-client-okhttp:2.3.12")
+    implementation("io.ktor:ktor-client-content-negotiation:2.3.12")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.12")
 
     // Kotlinx Serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 
     // Custom Tabs for Wallet Connection
     implementation("androidx.browser:browser:1.8.0")
+
+    // Lifecycle & ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.3")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.3")
 
     // AndroidX dependencies
     implementation(libs.androidx.core.ktx)
