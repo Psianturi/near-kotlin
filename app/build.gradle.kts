@@ -40,8 +40,8 @@ android {
 }
 
 dependencies {
-    // NEAR JSON-RPC Kotlin Client
-    implementation("com.github.Psianturi.near-jsonrpc-kotlin-client:near-jsonrpc-client:v1.0.0")
+    // NEAR JSON-RPC Kotlin Client - Updated to latest version
+    implementation("com.github.Psianturi.near-jsonrpc-kotlin-client:near-jsonrpc-client:v1.1.3")
 
     // Ktor for HTTP client
     implementation("io.ktor:ktor-client-okhttp:2.3.12")

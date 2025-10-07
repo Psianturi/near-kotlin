@@ -1,42 +1,104 @@
 # NEAR Android Demo App
 
-A modern Android application showcasing NEAR blockchain integration with a clean, intuitive interface.
+A modern, production-ready Android application showcasing NEAR blockchain integration with clean architecture, proper state management, and comprehensive error handling.
 
 ## 🚀 Features
 
-- **Wallet Connection**: Seamless NEAR Testnet wallet integration
-- **Network Monitoring**: Real-time NEAR network status and information
-- **RPC Integration**: Direct access to NEAR JSON-RPC endpoints
-- **Modern UI**: Built with Jetpack Compose and Material 3
-- **Type Safety**: Full Kotlin type safety with generated models
+### Core Features
+- ✅ **Wallet Connection** - Seamless NEAR Testnet/Mainnet wallet integration via Custom Tabs
+- ✅ **Network Monitoring** - Real-time NEAR network status and information
+- ✅ **RPC Integration** - Direct access to 15+ NEAR JSON-RPC endpoints
+- ✅ **Modern UI** - Built with Jetpack Compose and Material 3
+- ✅ **Type Safety** - Full Kotlin type safety with generated models
+- ✅ **Proper Architecture** - MVVM with Repository pattern
+- ✅ **State Management** - StateFlow for reactive UI updates
+- ✅ **Error Handling** - Comprehensive error handling with sealed classes
+- ✅ **Contract Interaction** - View method calls with custom parameters
+- ✅ **Account Queries** - Query any NEAR account information
+
+### New Update
+- 🎯 **ViewModel Architecture** - Proper state management with Jetpack ViewModel
+- 🔄 **StateFlow Integration** - Reactive UI updates
+- 🛡️ **Comprehensive Error Handling** - Sealed class error types
+- 📡 **15+ RPC Endpoints** - Expanded endpoint coverage
+- 🔍 **Advanced Queries** - Account queries and contract view calls
+- 🧪 **Unit Tests** - ViewModel and Repository testing
+- 📦 **Updated Library** - Using near-jsonrpc-kotlin-client v1.1.3
 
 ## 📸 Screenshots
 
-<img src="Screenshot_20250919_134111.png" alt="NEAR Android Demo App" width="300">
+<img src="Screenshot_20250919_134111.png" alt="NEAR Android Demo App" width="400">
+<img src="img.png" alt="NEAR Android Demo App" width="400">
 
+## 🏗️ Architecture
 
-## �️ Tech Stack
+```
+┌─────────────────────────────────────────┐
+│          UI Layer (Compose)             │
+│  - MainScreen.kt                        │
+│  - Dialogs & Components                 │
+└───────────────┬─────────────────────────┘
+                │
+┌───────────────▼─────────────────────────┐
+│         ViewModel Layer                 │
+│  - NearViewModel.kt                     │
+│  - State Management (StateFlow)         │
+└───────────────┬─────────────────────────┘
+                │
+┌───────────────▼─────────────────────────┐
+│        Repository Layer                 │
+│  - NearRepository.kt                    │
+│  - RPC Client Wrapper                   │
+│  - Error Handling                       │
+└───────────────┬─────────────────────────┘
+                │
+┌───────────────▼─────────────────────────┐
+│      NEAR JSON-RPC Client Library       │
+│  - JsonRpcTransport                     │
+│  - NearRpcClient                        │
+│  - Type Models                          │
+└─────────────────────────────────────────┘
+```
 
-- **Kotlin** - Modern Android development
-- **Jetpack Compose** - Declarative UI framework
-- **Ktor** - HTTP client for network requests
-- **NEAR JSON-RPC Kotlin Client** - Type-safe NEAR blockchain integration
+## 🛠️ Tech Stack
+
+- **Language**: Kotlin
+- **UI Framework**: Jetpack Compose
+- **Architecture**: MVVM + Repository Pattern
+- **State Management**: StateFlow
+- **HTTP Client**: Ktor with OkHttp engine
+- **Serialization**: kotlinx.serialization
+- **NEAR Integration**: near-jsonrpc-kotlin-client v1.1.3
+- **Testing**: JUnit, kotlinx-coroutines-test
 
 ## 📦 Dependencies
 
-### NEAR JSON-RPC Kotlin Client
+### Core Dependencies
 
 ```kotlin
-// Add to build.gradle.kts (app level)
-dependencies {
-    implementation("com.github.Psianturi.near-jsonrpc-kotlin-client:near-jsonrpc-client:v1.0.0")
-}
+// NEAR JSON-RPC Kotlin Client v1.1.3
+implementation("com.github.Psianturi.near-jsonrpc-kotlin-client:near-jsonrpc-client:v1.1.3")
+
+// Ktor HTTP Client
+implementation("io.ktor:ktor-client-okhttp:2.3.12")
+implementation("io.ktor:ktor-client-content-negotiation:2.3.12")
+implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.12")
+
+// Kotlinx Serialization
+implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+
+// Custom Tabs for Wallet
+implementation("androidx.browser:browser:1.8.0")
+
+// Lifecycle & ViewModel
+implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.3")
+implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.3")
 ```
 
 ### Repository Setup
 
 ```kotlin
-// Add to settings.gradle.kts
+// settings.gradle.kts
 dependencyResolutionManagement {
     repositories {
         mavenCentral()
@@ -48,15 +110,16 @@ dependencyResolutionManagement {
 ## 🔧 Setup Instructions
 
 ### Prerequisites
-- Android Studio Arctic Fox or later
+- Android Studio Hedgehog or later
 - JDK 17 or later
 - Android device/emulator (API 24+)
+- NEAR Testnet account (for wallet testing)
 
 ### Quick Start
 
-1. **Clone and Open**
+1. **Clone Repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Psianturi/near-kotlin
    cd nearkotlin
    ```
 
@@ -74,7 +137,6 @@ dependencyResolutionManagement {
    - Allow internet access when prompted
    - The app will request necessary permissions automatically
 
-
 ## 🌐 Network Configuration
 
 For Android API 28+, cleartext traffic is configured in `network_security_config.xml`:
@@ -88,12 +150,69 @@ For Android API 28+, cleartext traffic is configured in `network_security_config
 </domain-config>
 ```
 
+## 📚 API Features
+
+### Available RPC Endpoints
+
+| Endpoint | Description | Status |
+|----------|-------------|--------|
+| **network_info** | Network connection status & peers | ✅ Ready |
+| **status** | Node status, sync info, validators | ✅ Ready |
+| **block** | Block details (height, hash, timestamp) | ✅ Ready |
+| **gas_price** | Current gas prices | ✅ Ready |
+| **validators** | Active validators list | ✅ Ready |
+| **health** | RPC node health status | ✅ Ready |
+| **protocol_config** | Protocol-level parameters | ✅ Ready |
+| **genesis_config** | Genesis block configuration | ✅ Ready |
+| **chunk** | Chunk details by hash | ✅ Ready |
+| **changes** | State changes in block | ✅ Ready |
+| **query** | Generic account/contract queries | ✅ Ready |
+| **tx_status** | Transaction status by hash | ✅ Ready |
+| **client_config** | Client node configuration | ✅ Ready |
+| **light_client_proof** | Light client proofs | ✅ Ready |
+
+### Advanced Features
+
+#### 1. Account Queries
+Query any NEAR account information:
+
+```kotlin
+viewModel.queryAccount("example.testnet")
+```
+
+Returns account balance, storage usage, code hash, etc.
+
+#### 2. Contract View Calls
+Call smart contract view methods:
+
+```kotlin
+viewModel.callViewMethod(
+    contractId = "contract.testnet",
+    methodName = "get_message",
+    args = "{}"
+)
+```
+
+#### 3. Transaction Status
+Check transaction execution status:
+
+```kotlin
+viewModel.getTransactionStatus(
+    txHash = "transaction_hash_here",
+    accountId = "sender.testnet"
+)
+```
+
 ## 🧪 Testing
 
 ### Unit Tests
 
 ```bash
+# Run all unit tests
 ./gradlew testDebugUnitTest
+
+# Run specific test class
+./gradlew test --tests "NearViewModelTest"
 ```
 
 ### Integration Tests
@@ -102,104 +221,196 @@ For Android API 28+, cleartext traffic is configured in `network_security_config
 ./gradlew connectedDebugAndroidTest
 ```
 
-### Manual Testing
+### Manual Testing Checklist
 
-1. **Wallet Connection Test:**
-   - Tap "Connect Wallet"
-   - Verify Custom Tabs opens NEAR wallet
-   - Check callback handling after login
+- [ ] **Wallet Connection**
+  - Tap "Connect Wallet"
+  - Verify Custom Tabs opens NEAR wallet
+  - Complete authentication
+  - Check callback handling
 
-2. **RPC Calls Test:**
-   - Select different endpoints
-   - Verify data fetching works
-   - Check error handling
+- [ ] **RPC Endpoints**
+  - Test each endpoint individually
+  - Verify data fetching works
+  - Check error handling for network issues
 
+- [ ] **Account Queries**
+  - Query connected wallet account
+  - Query other accounts
+  - Verify balance display
 
-## 📚 API Reference
+- [ ] **Contract Calls**
+  - Call view methods
+  - Test with different parameters
+  - Verify result parsing
 
-### NEAR JSON-RPC Kotlin Client Usage
+## 💡 Usage Examples
 
-#### Basic Setup
-
-```kotlin
-// 1. Setup HTTP client
-val httpClient = HttpClient(OkHttp) {
-    install(ContentNegotiation) {
-        json(Json {
-            ignoreUnknownKeys = true
-            coerceInputValues = true
-        })
-    }
-}
-
-// 2. Create JsonRpcTransport
-val transport = JsonRpcTransport(
-    client = httpClient,
-    rpcUrl = "https://rpc.testnet.near.org"
-)
-
-// 3. Create NearRpcClient
-val nearClient = NearRpcClient(transport)
-
-// 4. Use RPC methods
-val networkInfo = nearClient.networkInfo()
-val status = nearClient.status()
-val block = nearClient.block()
-val gasPrice = nearClient.gasPrice()
-```
-
-#### Advanced Usage with Parameters
+### Basic Setup
 
 ```kotlin
-// Query account state
-val queryRequest = RpcQueryRequest(
-    requestType = "view_account",
-    accountId = "example.testnet",
-    finality = "final"
-)
-val accountInfo = nearClient.query(params = queryRequest)
-
-// Get specific block
-val blockRequest = BlockReference(finality = "final")
-val block = nearClient.block(params = blockRequest)
-
-// Get gas price for specific block
-val gasPriceRequest = RpcGasPriceRequest(blockId = 12345)
-val gasPrice = nearClient.gasPrice(params = gasPriceRequest)
-```
-
-#### Error Handling
-
-```kotlin
-try {
-    val result = nearClient.networkInfo()
-    // Process result
-} catch (e: Exception) {
-    when (e) {
-        is JsonRpcException -> {
-            // JSON-RPC specific error
-            println("RPC Error: ${e.error.code} - ${e.error.message}")
-        }
-        is IOException -> {
-            // Network error
-            println("Network Error: ${e.message}")
-        }
-        else -> {
-            // Other errors
-            println("Error: ${e.message}")
+// ViewModel is automatically created by MainActivity
+class MainActivity : ComponentActivity() {
+    private val viewModel: NearViewModel by viewModels()
+    
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            MaterialTheme {
+                MainScreen(
+                    viewModel = viewModel,
+                    initialAccountId = getAccountFromDeepLink()
+                )
+            }
         }
     }
 }
 ```
 
-## Acknowledgments
+### Observing State in Compose
 
-- NEAR Protocol for the blockchain infrastructure
-- Jetpack Compose for modern Android UI
-- Ktor for HTTP client functionality
-- Kotlinx.serialization for data serialization
+```kotlin
+@Composable
+fun MyScreen(viewModel: NearViewModel) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val walletState by viewModel.walletState.collectAsStateWithLifecycle()
+    val rpcResult by viewModel.rpcResult.collectAsStateWithLifecycle()
+    
+    when {
+        uiState.isLoading -> LoadingView()
+        uiState.error != null -> ErrorView(uiState.error)
+        rpcResult is NearResult.Success -> SuccessView(rpcResult.data)
+    }
+}
+```
 
-## Using NEAR JSON-RPC Kotlin Client in Your Project
+### Making RPC Calls
+
+```kotlin
+// Fetch endpoint data
+viewModel.fetchEndpointData(RpcEndpoint.Status)
+
+// Query account
+viewModel.queryAccount("example.testnet")
+
+// Call contract method
+viewModel.callViewMethod(
+    contractId = "guest-book.testnet",
+    methodName = "get_messages",
+    args = """{"from_index": "0", "limit": "10"}"""
+)
+```
+
+### Error Handling
+
+```kotlin
+when (val error = uiState.error) {
+    is NearError.NetworkError -> {
+        // Handle network issues
+        Text("Network error: ${error.message}")
+    }
+    is NearError.RpcError -> {
+        // Handle RPC errors
+        Text("RPC error (${error.code}): ${error.message}")
+    }
+    is NearError.AuthError -> {
+        // Handle authentication errors
+        Text("Auth error: ${error.message}")
+    }
+    else -> {
+        // Handle other errors
+        Text("Error: ${error?.toDisplayMessage()}")
+    }
+}
+```
+
+## 🔐 Wallet Integration
+
+### Connection Flow
+
+1. User taps "Connect Wallet"
+2. App opens NEAR Wallet in Custom Tab
+3. User authenticates in wallet
+4. Wallet redirects to `myapp://callback`
+5. App receives account ID and public key
+6. App updates wallet state and queries account info
+
+### Deep Link Configuration
+
+```xml
+<!-- AndroidManifest.xml -->
+<intent-filter android:autoVerify="true">
+    <action android:name="android.intent.action.VIEW" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <category android:name="android.intent.category.BROWSABLE" />
+    <data android:scheme="myapp" android:host="callback" />
+</intent-filter>
+```
+
+## 📊 State Management
+
+### UI States
+
+```kotlin
+data class NearUiState(
+    val isLoading: Boolean = false,
+    val error: NearError? = null,
+    val lastEndpoint: String? = null,
+    val selectedEndpoint: RpcEndpoint = RpcEndpoint.NetworkInfo
+)
+```
+
+### Wallet States
+
+```kotlin
+data class WalletState(
+    val isConnected: Boolean = false,
+    val accountId: String? = null,
+    val balance: String? = null
+)
+```
+
+### Result States
+
+```kotlin
+sealed class NearResult<out T> {
+    data class Success<T>(val data: T) : NearResult<T>()
+    data class Error(val error: NearError) : NearResult<Nothing>()
+    data object Loading : NearResult<Nothing>()
+}
+```
+
+## 🐛 Troubleshooting
+
+See [TROUBLESHOOTING.md](TROUBLESHOOTING.md) for common issues and solutions.
+
+## 🧪 Testing Guide
+
+See [TESTING.md](TESTING.md) for detailed testing instructions.
+
+## 📄 License
+
+This project is licensed under the Apache License 2.0 - see the LICENSE file for details.
+
+## 🙏 Acknowledgments
+
+- **NEAR Protocol** - For the blockchain infrastructure
+- **near-jsonrpc-kotlin-client** - For the RPC client library
+- **Jetpack Compose** - For modern Android UI
+- **Ktor** - For HTTP client functionality
+- **kotlinx.serialization** - For data serialization
+
+## 📞 Support
+
+- **Issues**: [GitHub Issues](https://github.com/Psianturi/near-kotlin/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/Psianturi/near-kotlin/discussions)
+- **NEAR Docs**: [docs.near.org](https://docs.near.org)
+
+## 🔗 Related Projects
+
+- [near-jsonrpc-kotlin-client](https://github.com/Psianturi/near-jsonrpc-kotlin-client) - The underlying RPC client library
+- [NEAR Protocol](https://github.com/near/nearcore) - NEAR Protocol core implementation
+- [NEAR Wallet](https://wallet.near.org) - Official NEAR Wallet
 
 ---
 
